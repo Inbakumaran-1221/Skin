@@ -1,0 +1,27 @@
+{
+  "name": "skinalyze",
+  "version": "1.0.0",
+  "description": "\"# Skinalyze\" \r \"# Skinalyze\" \r #\u0000 \u0000S\u0000k\u0000i\u0000n\u0000a\u0000l\u0000y\u0000z\u0000e\u0000\r\u0000 \u0000\"# Skinalyze\" \r \"# Skinalyze\"",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-router-dom": "^7.8.1",
+    "react-scripts": "^0.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^5.0.1",
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.12",
+    "vite": "^7.1.3"
+  }
+}

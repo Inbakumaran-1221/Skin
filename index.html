@@ -1,66 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Mozilla+Headline:wght@200..700&display=swap" rel="stylesheet">
     <title>SkinAnalyz</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <!-- Navbar -->
-    <nav>SkinAnalyz</nav>
-
-    <!-- Centered content -->
-    <div class="main-container">
-        <div class="upload-container">
-            <h1>AI-Powered Skin Disease Analyzer</h1>
-            <p class="subtitle">Upload a skin image to get instant predictions and recommendations.</p>
-            <input type="file" id="imageInput" style="display:none;">
-            <label for="imageInput" class="custom-file-label">Choose File</label>
-            <button onclick="uploadImage()">Predict</button>
-            <br>
-            <img id="preview" style="max-width: 300px; display: none; margin: 16px auto; display: block;" />
-            <div id="diagnosis" class="diagnosis-container"></div>
-        </div>
-    </div>
-
-    <script>
-        async function uploadImage() {
-            let file = document.getElementById("imageInput").files[0];
-            if (!file) {
-                document.getElementById("result").innerText = "⚠ Please select an image file.";
-                return;
-            }
-            let formData = new FormData();
-            formData.append("image", file);
-
-            // Preview the image
-            let reader = new FileReader();
-            reader.onload = function (e) {
-                document.getElementById("preview").src = e.target.result;
-                document.getElementById("preview").style.display = "block";
-            }
-            reader.readAsDataURL(file);
-
-            try {
-                let res = await fetch("http://127.0.0.1:5000/predict", {
-                    method: "POST",
-                    body: formData
-                });
-                let data = await res.json();
-                let diagnosisDiv = document.getElementById("diagnosis");
-                diagnosisDiv.innerHTML =
-                    `<strong>✅ Prediction:</strong> ${data.class_name} <br>
-                    <strong>Confidence:</strong> ${(data.confidence * 100).toFixed(2)}% <br>
-                    <strong>Description:</strong> ${data.description || "N/A"}<br>
-                    <strong>Treatment:</strong> ${data.treatment || "N/A"}<br>
-                    <strong>Recommendation:</strong> ${data.recommendation || "N/A"}`;
-            } catch (error) {
-                document.getElementById("result").innerText = "❌ Error: " + error.message;
-            }
-        }
-    </script>
-
-</body>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
