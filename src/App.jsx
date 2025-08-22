@@ -33,11 +33,13 @@ function Home() {
       });
       const data = await res.json();
       setResult(
-        `✅ Prediction: ${data.class_name}\nConfidence: ${(data.confidence * 100).toFixed(
+        `Prediction: ${data.class_name}
+        \n\nConfidence: ${(data.confidence * 100).toFixed(
           2
-        )}%\nDescription: ${data.description || "N/A"}\nTreatment: ${
+        )}%
+        \n\nDescription: ${data.description || "N/A"}\n\nTreatment: ${
           data.treatment || "N/A"
-        }\nRecommendation: ${data.recommendation || "N/A"}`
+        }\n\nRecommendation: ${data.recommendation || "N/A"}`
       );
     } catch (err) {
       setResult("❌ Error: " + err.message);
@@ -71,7 +73,7 @@ function Home() {
         {/* Left: Logo */}
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
           <span style={{ fontSize: "2rem", fontWeight: "700", color: "#22D3EE" }}>
-            SkinAnalyz
+            SkinAlyze
           </span>
         </div>
 
@@ -192,7 +194,19 @@ function Home() {
                 boxShadow: "inset 0 2px 6px rgba(0,0,0,0.05)",
               }}
             >
-              {result}
+              {result.split('\n').map((line, idx) => {
+                // Add inline style for larger font size
+                const bolded = line.replace(
+                  /^(Prediction:|Confidence:|Description:|Treatment:|Recommendation:)/,
+                  (match) => `<strong style="font-size:1.15em;">${match}</strong>`
+                );
+                return (
+                  <span
+                    key={idx}
+                    dangerouslySetInnerHTML={{ __html: bolded }}
+                  />
+                );
+              }).reduce((prev, curr) => [prev, <br key={Math.random()} />, curr])}
             </pre>
           )}
         </div>
